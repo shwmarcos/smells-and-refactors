@@ -24,35 +24,42 @@ class RestaurantSystem {
     address: string,
     cardNumber: string
   ): boolean {
-    if (name == "" || phone == "") {
+    if (name == "" || phone == "") 
+    {
       console.log("Customer missing");
       return false;
-    } else {
-      if (phone.length < 10) {
+    }
+    
+    if (phone.length < 10) 
+    {
         console.log("Bad phone");
         return false;
-      } else {
-        if (items.length == 0) {
-          console.log("No items");
-          return false;
-        } else {
-          let subtotal = 0;
-          for (let i = 0; i < items.length; i++) {
-            if (quantities[i] <= 0) {
-              console.log("Bad qty");
-              return false;
-            }
-            subtotal += prices[i] * quantities[i];
-          }
+    }
+    if (items.length == 0) 
+    {
+        console.log("No items");
+        return false;
+    }
+    let subtotal = 0;
+    for (let i = 0; i < items.length; i++) 
+    {
+      if (quantities[i] <= 0) 
+      {
+            console.log("Bad qty");
+            return false;
+      }
+      subtotal += prices[i] * quantities[i];
+    }
 
-          let delivery = subtotal > 50 ? 0 : 5;
-          const tax = subtotal * 0.1;
-          const total = subtotal + delivery + tax;
+     let delivery = subtotal > 50 ? 0 : 5;
+     const tax = subtotal * 0.1;
+     const total = subtotal + delivery + tax;
 
-          if (address.length < 10) {
+     if (address.length < 10) 
+     {
             console.log("Bad addr");
             return false;
-          } else {
+     }
             if (cardNumber.length != 16) {
               console.log("Bad card");
               return false;

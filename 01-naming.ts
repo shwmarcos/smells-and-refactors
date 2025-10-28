@@ -1,34 +1,34 @@
 // TODO: Refactor this code to follow clean naming conventions
 
-class Prod {
+class Product {
   constructor(
-    public n: string,
-    public p: number,
-    public q: number,
-    public d: boolean
+    public name: string,
+    public productId: number,
+    public quantity: number,
+    public delivered: boolean
   ) {}
 }
 
-class Usr {
+class User {
   constructor(
     public id: number,
-    public nm: string,
-    public e: string,
-    public blocked: boolean,
-    public bal: number
+    public name: string,
+    public email: string,
+    public isAvaliable: boolean,
+    public balance: number
   ) {}
 }
 
-class Ord {
+class Order {
   constructor(
-    public no: number,
-    public u: Usr,
-    public items: Prod[],
-    public st: string
+    public number: number,
+    public user: User,
+    public items: Product[],
+    public state: string
   ) {}
 }
 
-class Mgr {
+class Manager {
   private data: Ord[] = [];
   private flag = true;
 
@@ -69,17 +69,17 @@ class Mgr {
     return err;
   }
 
-  calc(o: Ord): number {
-    let amt = 0;
+  calculate(o: Order): number {
+    let amount = 0;
     for (let i = 0; i < o.items.length; i++) {
-      const itm = o.items[i];
-      let p = itm.p * itm.q;
+      const item = o.items[i];
+      let p = item.p * item.q;
       if (itm.d) {
         p = p * 0.9;
       }
-      amt += p;
+      amount += p;
     }
-    return amt * 1.21;
+    return amount * 1.21;
   }
 
   proc(o: Ord, v: number): void {
@@ -106,10 +106,10 @@ class Mgr {
 
 function main01() {
   const mgr = new Mgr();
-  const u1 = new Usr(1, "John", "j@test.com", false, 1000);
-  const p1 = new Prod("Laptop", 999, 1, true);
-  const p2 = new Prod("Mouse", 25, 2, false);
-  const ord1 = new Ord(1001, u1, [p1, p2], "ready");
+  const u1 = new User(1, "John", "j@test.com", false, 1000);
+  const p1 = new Product("Laptop", 999, 1, true);
+  const p2 = new Product("Mouse", 25, 2, false);
+  const ord1 = new Order(1001, u1, [p1, p2], "ready");
 
   const res = mgr.do(ord1);
   console.log(res ? "OK" : "FAIL");
